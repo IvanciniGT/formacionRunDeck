@@ -1,0 +1,17 @@
+version: "2"
+
+services:
+    rundeck:
+        container_name:     mirundeck
+        image:              rundeck/rundeck:5.1.0
+        environment:
+            # Esta URL es en la que se ofrece servicio (PUBLICO)
+            # Por defecto se ofrece la URL: http://127.0.0.1:440
+            # En nuestro caso, al tener en el host una ip de una vpn a la que no tenemos acceso desde cada,
+            # usámos una IP Publica que amazon nos suministra y que sacamos de: 
+            #  $ curl ifconfig.me
+            RUNDECK_GRAILS_URL: "http://34.241.119.71:4440"
+        volumes:
+                              - /home/ubuntu/environment/data/rundeck:/home/rundeck/server/data
+        ports:
+                              - 4440:4440

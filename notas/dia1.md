@@ -85,3 +85,5 @@ Pequeños flujos de Operación: Rundeck
 
 Rundeck ~= Ansible Tower (solo permite ejecutar/orquestar playbooks de Ansible)
 Rundeck nos permite ejecutar cualquier tipo de tarea en cualquier tipo de sistema.
+
+
