@@ -13,4 +13,5 @@
         -   name: Post tarea 1
             shell:
                 cmd: pwd
+            changed_when: false
     #handlers:
