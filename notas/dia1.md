@@ -14,7 +14,7 @@ Automatizar principalmente tareas de administración de sistemas, pero también 
 
 Pero.. no es una herramienta como Ansible, Terraform, Puppet, Chef... sino que es una herramienta que se encarga de orquestar y ejecutar tareas en sistemas remotos.
 
-Sería equivalente a Jenkins / Ansible Tower.
+Sería equivalente a Jenkins / Ansible Tower (AWX).
 
 ---
 
