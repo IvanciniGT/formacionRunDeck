@@ -1,0 +1,8 @@
+version: "2"
+services:
+    entorno1:
+        container_name:     entorno1
+        image:              rastasheep/ubuntu-sshd:18.04
+        ports:
+                              - 1022:22
+# docker compose up -d                              
