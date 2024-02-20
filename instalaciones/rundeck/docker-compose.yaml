@@ -13,15 +13,15 @@ services:
             # En nuestro caso, al tener en el host una ip de una vpn a la que no tenemos acceso desde cada,
             # usámos una IP Publica que amazon nos suministra y que sacamos de: 
             #  $ curl ifconfig.me
-            RUNDECK_GRAILS_URL: "http://54.246.202.152:4440"
+            RUNDECK_GRAILS_URL: "http://${PUBLIC_IP}:4440"
             # En el caso de Amazon... y en otros clouds, tenemos un firewall de red que bloquea las comunicaciones
             # Hay que abrir el puerto (en nuestro caso, deshabilitaremos el forewall porque vamos a montar muchas apps) 
             # EN UN ENTORNO REAL NI DE COÑA !!!
-            RUNDECK_MARIADB_URL:            jdbc:mariadb://db/rundeck?autoReconnect=true&useSSL=false
-                                            #jdbc:mariadb://db:3306/rundeck
-            RUNDECK_DATABASE_DRIVER:        org.mariadb.jdbc.Driver
-            RUNDECK_DATABASE_USER:          usuario
+            RUNDECK_DATABASE_URL:           jdbc:mariadb://db:3306/rundeck?autoReconnect=true&useSSL=false
+            RUNDECK_DATABASE_USERNAME:      usuario
             RUNDECK_DATABASE_PASSWORD:      password
+            RUNDECK_DATABASE_DRIVER:        org.mariadb.jdbc.Driver
+            RUNDECK_DATABASE_DIALECT:       org.hibernate.dialect.MariaDBDialect
         volumes:
                               - /home/ubuntu/environment/data/rundeck:/home/rundeck/server/data
         ports:
@@ -37,5 +37,6 @@ services:
             MARIADB_PASSWORD:      password
         volumes:
                               - /home/ubuntu/environment/data/mariadb:/var/lib/mysql
-
+    # En: https://github.com/rundeck/docker-zoo/tree/master
+    # Teneis ejemplos de configuración de postgresql, mysql, sqlserver y oracle
 
