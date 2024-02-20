@@ -56,5 +56,30 @@ Desde el host: ssh 172.31.AAA.BBB:1022 y llega sin problema
 Desde el rundeck no iba a funcionar
     
     
+---
+
+# RUNDECK & ANSIBLE
+
+Rundeck             
+ (app grails/Groovy < --- JAVA)
+    - Interfaz Web
+    - API REST
     
-    
+    Proyecto
+        Nodos: (sacados del inventario Ansible)
+        Job:
+            - Tarea: Ejecutar el playbook (1)
+
+Rundeck lo único que hará (1) será pedirle a un PLUGIN DE ANSIBLE que llame a Ansible para ejecutar nuestro playbook
+
+             (esto no es ansible)
+RunDeck ---> Plugin de Ansible ---> Ansible
+ ^
+ Proyecto
+  ^
+  Job
+   ^
+   TAREA: 
+        plugin: Que es quién ejecuta la tarea
+        metadatos:
+            - playbook que queremos que se ejecute 
