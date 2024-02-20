@@ -1,7 +1,7 @@
 # Arranque docker-compose up (En nuestro caso hemos creado un init.sh... para permisos de las carpetas)
 # Para asegurar el correcto arranque del contenedor: $ docker logs mirundeck
 
-version: "2"
+version: "2" # La versión del esquema YAML de docker compose que estamos usando para este documento
 
 services:
     rundeck:

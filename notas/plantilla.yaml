@@ -1,0 +1,136 @@
+# YAML Es un lenguaje que nos permite estructurar información. De proposito general.
+# Es equivalente a lo que serían JSON o XML
+# 1º Podemos poner comentarios.. no como en JSON... aleyuya
+# 2º En un fichero YAML puedo tener muchos documentos yaml
+# Cada documento va precedido de 3 guiones... salvo el primero
+...
+---
+# Documento
+# MUY RARO... pero a veces se ve algun friki tocarnarices que no sabe lo que hace:
+# Opcionalmente cada documento puede acabar con ...
+... # Y quizas a la hora (3 segundos)
+---
+# Otro Documento
+# Un documento yaml es UN NODO
+# En yaml hay 2 grandes tipos de nodos: ESCALARES y de COLECCION
+---
+# Escalares: Contienen un solo valor
+# Número
+3
+---
+-7.9
+---
+-.Inf # -.INF -.inf
+---
+.Nan # .NAN .nan
+---
+# Booleanos:
+True # true TRUE
+---
+False # FALSE false
+---
+# NOTA Y OJO !!!!
+# Hoy en día estamos en v1.2 del estandar YAML
+# En versión 1.1 se admitían:
+# On on ON 
+# YES yes Yes y
+# OFF off Off
+# NO no No n
+# como valores lógicos.
+# LO HICIERON FATAL EN YAML... y no lo deprecaron... directamente al pasar a 1.2 lo crujieron del estandar.
+# Algunos parsers de YAML los siguen admitiendo... al menos algunos de ellos... 
+# En cuanto veais algo como esto lo cambiais por TRUE o FALSE
+---
+#Textos (LO MAS COMPLEJO EN YAML con diferencia)
+# PREFERIDA vvvvv
+Esto 'es" un \texto en #YAML
+---
+"Esto 'es\" un \\texto en #YAML" # LA CONTRABARRA SOLO FUNCIONA COMO CARACTER DE ESCAPE ENTRE COMILLAS DOBLES
+---
+'Esto ''es" un \texto en #YAML'
+---
+# Si tengo textos más complejos, usamos otars 2 sintaxis:
+# LITERAL
+|4
+     Empiezo a escribir texto
+      Y aqui otra linea
+    Y podemos tener espacion en blanco o caracteres raro
+    
+    :"'\nm\t\$()
+    
+---
+# FOLDED
+>-
+    docker container create
+        --name micontenedor
+        -p 0.0.0.0:1022:22
+        rastasheep/sshd:ubuntu:18
+---
+# NULO
+~
+---
+# NODOS DE COLECCION: LISTAS ORDENADAS | MAPAS DESORDENADOS
+# LISTAS ORDENADAS:
+- item1
+- 2
+- true
+- 
+  - subitem1
+  - subitem2
+-   - subitem1 # Lo mismo que arriba
+    - subitem2
+--- 
+# Sintaxis alternativa YAML para listas:
+[item1, 2, true] # NO ESTA NADA RECOMENDADA ! NO LA USAMOS!
+# Más compleja de leer, de escribir, pero LO GORDO viene en GIT
+# Git (igual que cualquier otro SCM) identifica cambios a nivel de LINEA DE CODIGO
+# Tiene 2 finalidades:
+## Compatibilidad con JSON
+## El único caso válido de uso: LISTAS VACIAS:
+---
+[]
+---
+# MAPAS DESORDENADOS: Conjuntos claves/Valor (diccionarios, Map, Array asociativo)
+clave1: valor1
+clave2: 2
+clave3: True
+clave4:
+    - item 1
+    - item2
+clave5:
+    subclave1: 1
+    subclave2: 2
+# Mismas reglas de sangrado que en las listas
+---
+# Sintaxis alternativa
+{clave1: valor1, clave2: valor2} # Con los mismos comentarios que arriba para listas
+---
+{}
+---
+# NOTA 2:
+clave1: valor1
+clave2: valor2
+---
+clave2: valor2
+clave1: valor1
+
+# Esos dos diccionarios / Maps.... son IGUALES
+---
+# Anchors de YAML (ULTRA-UTIL) El equivalente (en parte) a las entidades de XML
+clave1: &valor valor1
+clave2: 2
+clave3: True
+clave4:
+    - item 1
+    - item2
+clave5: &mapa
+    subclave1: 1
+    subclave2: 2
+clave6:
+    subclave6.1:
+        item1: *valor # Como si hubiera puesto valor1
+        <<: *mapa # Añadiría las claves y valores definidos en mapa: subclave1 y subclave2 dentreo del mapa: subclave6.1
+        #subclave1: 1
+        #subclave2: 2
+---
+# CADA APP que usa YAML define su propio ESQUEMA YAML... que define la estructura válida de los documentos YAML procesables por ese programa

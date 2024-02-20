@@ -1,0 +1,16 @@
+-   # Aquí va 1 play
+    hosts: all # Nombre de 1 : local | entorno1 | contenedores
+    gather_facts: false # Si quiero traer información adicional de esos nodos (OS, #CPUs, RAM)
+    
+    #pre_tasks:
+    tasks:
+        -   name: Tarea 1
+            # MODULO ANSIBLE QUE EJECUTA LA TAREA (programa que alguien ha hecho... respetando idempotencia)
+            debug:
+                msg: "Hola, soy la tarea 1"
+                
+    post_tasks:
+        -   name: Post tarea 1
+            shell:
+                cmd: pwd
+    #handlers:

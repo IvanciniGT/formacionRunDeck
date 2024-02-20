@@ -27,3 +27,34 @@ Hay varias opciones para cargarlos:
 - Kubernetes
 - Docker
 - Clouds: AWS EC2, AZURE, GCP
+
+---
+
+# INFRAESTRUCTURA PARA EL CURSO
+
+    ---------------------------red de amazon--------------------
+    |
+    172.31.AAA.BBB:1022 -> 172.22.0.2:22
+    |
+    host
+    |
+    |-127.0.0.1------------------------------------------------------- red loopback
+    |-172.21.0.1-------+----------------------------+------------------ docker network DOCKER-COMPOSE RUNDECK
+    |                  |                            |
+    |               172.21.0.2 (rundeck)        172.21.0.3 (mariadb)
+    |
+    |-172.22.0.1-------+----------------------------------------------- docker network DOCKER-COMPOSE entorno1
+    |                  |                            
+    |               172.22.0.2 (entorno1)
+    |
+    |-127.0.0.1------------------------------------------------------- red loopback
+
+Desde el host: ssh root@172.22.0.2 y llega sin problema
+Desde el rundeck no iba a funcionar
+
+Desde el host: ssh 172.31.AAA.BBB:1022 y llega sin problema
+Desde el rundeck no iba a funcionar
+    
+    
+    
+    
