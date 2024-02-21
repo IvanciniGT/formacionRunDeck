@@ -1,0 +1,47 @@
+# Arranque docker-compose up (En nuestro caso hemos creado un init.sh... para permisos de las carpetas)
+# Para asegurar el correcto arranque del contenedor: $ docker logs mirundeck
+
+version: "2" # La versión del esquema YAML de docker compose que estamos usando para este documento
+
+services:
+    rundeck:
+        container_name:     mirundeck
+        build: # Genera una imagen de contenedor
+            context:        . # En esta carpeta tienes el Dockerfile... y cualquier otro archivo que necesites
+            args:
+                RUNDECK_IMAGE:  rundeck/rundeck:5.1.0
+        image:              rundeck-ansible:5.1.0          
+        environment:
+            # Esta URL es en la que se ofrece servicio (PUBLICO)
+            # Por defecto se ofrece la URL: http://127.0.0.1:440
+            # En nuestro caso, al tener en el host una ip de una vpn a la que no tenemos acceso desde cada,
+            # usámos una IP Publica que amazon nos suministra y que sacamos de: 
+            #  $ curl ifconfig.me
+            RUNDECK_GRAILS_URL: "http://${PUBLIC_IP}:4440"
+            # En el caso de Amazon... y en otros clouds, tenemos un firewall de red que bloquea las comunicaciones
+            # Hay que abrir el puerto (en nuestro caso, deshabilitaremos el forewall porque vamos a montar muchas apps) 
+            # EN UN ENTORNO REAL NI DE COÑA !!!
+            RUNDECK_DATABASE_URL:           jdbc:mariadb://db:3306/rundeck?autoReconnect=true&useSSL=false
+            RUNDECK_DATABASE_USERNAME:      usuario
+            RUNDECK_DATABASE_PASSWORD:      password
+            RUNDECK_DATABASE_DRIVER:        org.mariadb.jdbc.Driver
+            RUNDECK_DATABASE_DIALECT:       org.hibernate.dialect.MariaDBDialect
+        volumes:
+                              - /home/ubuntu/environment/data/rundeck:/home/rundeck/server/data
+                              - /home/ubuntu/environment/curso/proyectos/ansible:/home/rundeck/server/data/ansible
+        ports:
+                              - 4440:4440
+
+    db: # FQDN resoluble en la red de docker 
+        container_name:     mimariadb
+        image:              mariadb:11.2 # En un momento dado puede apuntar a la 11.2.3 o a la 11.2.5
+        environment:
+            MARIADB_ROOT_PASSWORD: password
+            MARIADB_DATABASE:      rundeck
+            MARIADB_USER:          usuario
+            MARIADB_PASSWORD:      password
+        volumes:
+                              - /home/ubuntu/environment/data/mariadb:/var/lib/mysql
+    # En: https://github.com/rundeck/docker-zoo/tree/master
+    # Teneis ejemplos de configuración de postgresql, mysql, sqlserver y oracle
+
