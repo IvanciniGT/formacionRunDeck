@@ -26,11 +26,17 @@ services:
             RUNDECK_DATABASE_PASSWORD:      password
             RUNDECK_DATABASE_DRIVER:        org.mariadb.jdbc.Driver
             RUNDECK_DATABASE_DIALECT:       org.hibernate.dialect.MariaDBDialect
+            # Configuracion email server:
+            # https://docs.rundeck.com/docs/administration/configuration/docker.html#security-headers:~:text=for%20CSP%20headers.-,%23,-Email
+            RUNDECK_MAIL_SMTP_HOST:         mi-email-server
+            RUNDECK_MAIL_SMTP_PORT:         1025
         volumes:
                               - /home/ubuntu/environment/data/rundeck:/home/rundeck/server/data
                               - /home/ubuntu/environment/curso/proyectos/ansible:/home/rundeck/server/data/ansible
         ports:
                               - 4440:4440
+        networks:
+            - rundeck
 
     db: # FQDN resoluble en la red de docker 
         container_name:     mimariadb
@@ -42,6 +48,20 @@ services:
             MARIADB_PASSWORD:      password
         volumes:
                               - /home/ubuntu/environment/data/mariadb:/var/lib/mysql
+        networks:
+            - rundeck
     # En: https://github.com/rundeck/docker-zoo/tree/master
     # Teneis ejemplos de configuración de postgresql, mysql, sqlserver y oracle
 
+    mi-email-server: # FQDN resoluble en la red de docker 
+        container_name:     mimailhog
+        image:              mailhog/mailhog
+        ports:
+                          # Trabaja en el puerto 1025... pero no lo exponemos... no nos hace falta
+                          - 8080:8025
+        networks:
+                          - rundeck
+
+networks:
+    rundeck:
+        name: mi-red

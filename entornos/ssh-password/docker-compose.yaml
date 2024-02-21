@@ -5,4 +5,10 @@ services:
         image:              rastasheep/ubuntu-sshd:18.04
         ports:
                               - 1022:22
+        networks:
+            - rundeck
+networks:
+    rundeck:
+        external:   true    
+        name:       mi-red
 # docker compose up -d                              
