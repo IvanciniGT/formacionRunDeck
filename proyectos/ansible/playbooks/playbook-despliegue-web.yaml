@@ -28,6 +28,7 @@
         
         -   name: Arranco nginx
             shell:
+                #cmd: "(ps -eaf | egrep [n]ginx )  || sudo nginx"
                 cmd: nginx
             become: true
         
