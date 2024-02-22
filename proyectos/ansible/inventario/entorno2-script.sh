@@ -13,7 +13,7 @@ entorno2:
     lsb_codename: bionic
     virtualization_role: guest
     userspace_architecture: x86_64
-    processor_count: 1
+    processor_count: 7
     tz: UTC
     bios_date: 10/16/2017
     distribution: Ubuntu
