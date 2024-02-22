@@ -12,3 +12,6 @@ networks:
         external:   true    
         name:       mi-red
 # docker compose up -d                              
+
+# IP DEL CONTENEDOR:22 se abre en una RED virtual de Docker
+# IP DEL HOST: 1022
