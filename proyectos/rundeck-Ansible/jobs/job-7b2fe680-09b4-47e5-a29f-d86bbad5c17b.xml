@@ -1,0 +1,54 @@
+<joblist>
+  <job>
+    <defaultTab>nodes</defaultTab>
+    <description></description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>false</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>1</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <id>7b2fe680-09b4-47e5-a29f-d86bbad5c17b</id>
+    <loglevel>INFO</loglevel>
+    <name>servidor-web</name>
+    <nodeFilterEditable>false</nodeFilterEditable>
+    <nodefilters>
+      <filter>name: entorno2 </filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <plugins />
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='true' strategy='node-first'>
+      <command>
+        <script><![CDATA[sudo apt update
+sudo apt install nginx -y]]></script>
+        <scriptargs />
+      </command>
+      <command>
+        <node-step-plugin type='com.batix.rundeck.plugins.AnsiblePlaybookWorflowNodeStep'>
+          <configuration>
+            <entry key='ansible-become' value='false' />
+            <entry key='ansible-binaries-dir-path' value='/home/rundeck/.local/bin' />
+            <entry key='ansible-playbook' value='/home/rundeck/server/data/ansible/playbooks/playbook-despliegue-web.yaml' />
+            <entry key='ansible-ssh-passphrase-option' value='option.password' />
+            <entry key='ansible-ssh-use-agent' value='false' />
+          </configuration>
+        </node-step-plugin>
+      </command>
+      <command>
+        <node-step-plugin type='com.batix.rundeck.plugins.AnsiblePlaybookWorflowNodeStep'>
+          <configuration>
+            <entry key='ansible-become' value='false' />
+            <entry key='ansible-binaries-dir-path' value='/home/rundeck/.local/bin' />
+            <entry key='ansible-playbook' value='/home/rundeck/server/data/ansible/playbooks/playbook-prueba-web.yaml' />
+            <entry key='ansible-ssh-passphrase-option' value='option.password' />
+            <entry key='ansible-ssh-use-agent' value='false' />
+          </configuration>
+        </node-step-plugin>
+      </command>
+    </sequence>
+    <uuid>7b2fe680-09b4-47e5-a29f-d86bbad5c17b</uuid>
+  </job>
+</joblist>

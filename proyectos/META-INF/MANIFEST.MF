@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Rundeck-Application-Version: 5.1.0-20240214
+Rundeck-Archive-Format-Version: 1.0
+Rundeck-Archive-Project-Name: Ansible
+Rundeck-Archive-Export-Date: 2024-02-22T17:53:33Z
+

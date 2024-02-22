@@ -1,0 +1,50 @@
+<joblist>
+  <job>
+    <defaultTab>nodes</defaultTab>
+    <description></description>
+    <dispatch>
+      <excludePrecedence>true</excludePrecedence>
+      <keepgoing>false</keepgoing>
+      <rankOrder>ascending</rankOrder>
+      <successOnEmptyNodeFilter>false</successOnEmptyNodeFilter>
+      <threadcount>1</threadcount>
+    </dispatch>
+    <executionEnabled>true</executionEnabled>
+    <id>dff979b8-eb28-4caf-b47f-7119c87edc32</id>
+    <loglevel>INFO</loglevel>
+    <name>Ejecutar Playbook</name>
+    <nodeFilterEditable>false</nodeFilterEditable>
+    <nodefilters>
+      <filter>entorno1</filter>
+    </nodefilters>
+    <nodesSelectedByDefault>true</nodesSelectedByDefault>
+    <notification>
+      <onstart>
+        <email attachLog='true' attachLogInline='true' recipients='ami@yo.com' subject='Empezamos ! ${job.name}' />
+      </onstart>
+      <onsuccess>
+        <email attachLog='true' attachLogInFile='true' recipients='otro@correo.que.tengo' />
+      </onsuccess>
+    </notification>
+    <notifyAvgDurationThreshold />
+    <plugins />
+    <scheduleEnabled>true</scheduleEnabled>
+    <sequence keepgoing='true' strategy='node-first'>
+      <command>
+        <node-step-plugin type='com.batix.rundeck.plugins.AnsiblePlaybookWorflowNodeStep'>
+          <configuration>
+            <entry key='ansible-become' value='false' />
+            <entry key='ansible-binaries-dir-path' value='/home/rundeck/.local/bin' />
+            <entry key='ansible-playbook' value='/home/rundeck/server/data/ansible/playbooks/playbook1.yaml' />
+            <entry key='ansible-ssh-auth-type' value='password' />
+            <entry key='ansible-ssh-passphrase-option' value='option.password' />
+            <entry key='ansible-ssh-password-storage-path' value='keys/project/Ansible/contenedores-password' />
+            <entry key='ansible-ssh-use-agent' value='false' />
+            <entry key='ansible-ssh-user' value='root' />
+          </configuration>
+        </node-step-plugin>
+      </command>
+    </sequence>
+    <uuid>dff979b8-eb28-4caf-b47f-7119c87edc32</uuid>
+  </job>
+</joblist>

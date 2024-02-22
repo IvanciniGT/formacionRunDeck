@@ -1,0 +1,8 @@
+by:
+  urn: project:Ansible
+for:
+  storage:
+    - match: 
+        path: 'keys/project/Ansible/.*'
+      allow: [read] 
+description: Allow access to key storage
