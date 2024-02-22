@@ -1,0 +1,21 @@
+-   
+    hosts: all
+    gather_facts: false 
+
+    tasks:
+        -   name: Instalar curl
+            apt:
+                name: curl
+                state: latest
+            become: true
+
+        -   name: Probar web desde dentro
+            shell:
+                cmd: curl localhost | grep "This is the website main page"
+            changed_when: false
+
+        -   name: Probar web desde fuera
+            shell:
+                cmd: curl 172.21.0.6 | grep "This is the website main page"
+            delegate_to: localhost
+            changed_when: false

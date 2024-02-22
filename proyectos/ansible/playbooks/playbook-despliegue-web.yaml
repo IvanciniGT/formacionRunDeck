@@ -1,0 +1,33 @@
+-   
+    hosts: all # Nombre de 1 : local | entorno1 | contenedores
+    gather_facts: false # Si quiero traer información adicional de esos nodos (OS, #CPUs, RAM)
+    
+    tasks:
+
+        -   name: Borrar posibles desccargas previas
+            file:
+                state: absent
+                path: /tmp/web
+                
+        -   name: Descargar web
+            git:
+                repo: https://github.com/IvanciniGT/webEjemploAnsible.git
+                dest: /tmp/web
+
+        -   name: Borrar el repo de git
+            file:
+                state: absent
+                path: /tmp/web/.git
+
+        -   name: Copio lo que me interesa
+            copy:
+                src: /tmp/web/
+                dest: /var/www/html
+                remote_src: yes
+            become: true
+        
+        -   name: Arranco nginx
+            shell:
+                cmd: nginx
+            become: true
+        

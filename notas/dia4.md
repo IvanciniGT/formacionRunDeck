@@ -15,6 +15,7 @@ Imaginad que voy a instalar un cluster de nginx (nodo1, nodo2, nodo3...)
         - Playbook de ansible
             Que haga un clonado del repo de git en una carpeta: https://github.com/IvanciniGT/webEjemploAnsible.git
             Copie los archivos descargados en la carpeta de nginx adecuada para servirlos
+                /var/www/html
         # Donde hago la prueba? TODAS?
             - Playbook de ansible que: NODE STEP
                 Haga una prueba y mire si la web funciona bien
