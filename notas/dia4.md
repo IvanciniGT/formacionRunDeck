@@ -1,5 +1,7 @@
 En el mismo proyecto que teniamos:
     - Nuevo NodeSource: Local, Ansible Inventory, 
+        Fichero YAML
+                vv
         Script BASH -> Que genere un fichero YAML según la especificación de RUNDECK
                         Con la info del nodo
         Le poneis un icono propio
