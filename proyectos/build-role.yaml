@@ -33,7 +33,7 @@ for:
       allow: [create] # allow create of projects
     - equals:
         kind: system_acl
-      allow: [read,create,update,delete] # allow modifying system ACL files
+      allow: [read] # allow modifying system ACL files
   project:
     - match:
         name: '.*'
