@@ -31,12 +31,12 @@ services:
             RUNDECK_MAIL_SMTP_HOST:         mi-email-server
             RUNDECK_MAIL_SMTP_PORT:         1025
 
-            #RUNDECK_JAAS_MODULES_0: JettyCombinedLdapLoginModule
-            #RUNDECK_JAAS_LDAP_PROVIDERURL: ldap://openldap:389
-            #RUNDECK_JAAS_LDAP_BINDDN: cn=admin,dc=curso,dc=com
-            #RUNDECK_JAAS_LDAP_BINDPASSWORD: password
-            #RUNDECK_JAAS_LDAP_USERBASEDN: ou=users,dc=curso,dc=com
-            #RUNDECK_JAAS_LDAP_ROLEBASEDN: ou=roles,dc=curso,dc=com
+            RUNDECK_JAAS_MODULES_0: JettyCombinedLdapLoginModule
+            RUNDECK_JAAS_LDAP_PROVIDERURL: ldap://openldap:389
+            RUNDECK_JAAS_LDAP_BINDDN: cn=admin,dc=curso,dc=com
+            RUNDECK_JAAS_LDAP_BINDPASSWORD: password
+            RUNDECK_JAAS_LDAP_USERBASEDN: ou=users,dc=curso,dc=com
+            RUNDECK_JAAS_LDAP_ROLEBASEDN: ou=roles,dc=curso,dc=com
         volumes:
                               - /home/ubuntu/environment/data/rundeck:/home/rundeck/server/data
                               - /home/ubuntu/environment/curso/proyectos/ansible:/home/rundeck/server/data/ansible
