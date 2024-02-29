@@ -87,3 +87,8 @@ objectClass: groupOfUniqueNames
 uniqueMember: cn=admin,ou=users,{{ LDAP_BASE_DN }}
 uniqueMember: cn=deploy,ou=users,{{ LDAP_BASE_DN }}
 cn: deploy
+
+dn: cn=test, ou=roles,{{ LDAP_BASE_DN }}
+objectClass: groupOfUniqueNames
+uniqueMember: cn=test,ou=users,{{ LDAP_BASE_DN }}
+cn: test
