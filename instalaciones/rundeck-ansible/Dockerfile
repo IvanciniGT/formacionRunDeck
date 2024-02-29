@@ -20,5 +20,10 @@ RUN sudo apt-get -y update \
 RUN sudo mkdir /etc/ansible \
   && pip install ansible==2.10.1
 
+# Copiar acls customizadas
+COPY acls/ /home/rundeck/etc/
+RUN sudo chmod 775 /home/rundeck/etc/*.aclpolicy \
+ && sudo chown rundeck:root /home/rundeck/etc/*.aclpolicy
+
 # Añadir ansible en el path
 ENV PATH=$PATH:~/.local/bin

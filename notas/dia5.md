@@ -15,3 +15,8 @@ En este caso, elegiré el formato de archivo con el que me sienta más cómodo p
 En general YAML es lo mejor si hay que editar a mano.
 Si lo editamos vía un script depende del programa que use.
 Si no lo voy a editar me la trae al peiro!
+
+---
+
+El usuario deploy debe poder:
+- Ver cualquier proyecto y sus cosas... y ejecutar trabajos... Pero no puede tocar nada!
