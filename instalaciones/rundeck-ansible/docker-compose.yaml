@@ -30,6 +30,13 @@ services:
             # https://docs.rundeck.com/docs/administration/configuration/docker.html#security-headers:~:text=for%20CSP%20headers.-,%23,-Email
             RUNDECK_MAIL_SMTP_HOST:         mi-email-server
             RUNDECK_MAIL_SMTP_PORT:         1025
+
+            #RUNDECK_JAAS_MODULES_0: JettyCombinedLdapLoginModule
+            #RUNDECK_JAAS_LDAP_PROVIDERURL: ldap://openldap:389
+            #RUNDECK_JAAS_LDAP_BINDDN: cn=admin,dc=curso,dc=com
+            #RUNDECK_JAAS_LDAP_BINDPASSWORD: password
+            #RUNDECK_JAAS_LDAP_USERBASEDN: ou=users,dc=curso,dc=com
+            #RUNDECK_JAAS_LDAP_ROLEBASEDN: ou=roles,dc=curso,dc=com
         volumes:
                               - /home/ubuntu/environment/data/rundeck:/home/rundeck/server/data
                               - /home/ubuntu/environment/curso/proyectos/ansible:/home/rundeck/server/data/ansible
@@ -59,6 +66,41 @@ services:
         ports:
                           # Trabaja en el puerto 1025... pero no lo exponemos... no nos hace falta
                           - 8080:8025
+        networks:
+                          - rundeck
+
+
+
+    openldap:
+        image: osixia/openldap:1.2.1
+        container_name: openldap
+        environment:
+            LDAP_ORGANISATION: Curso
+            LDAP_DOMAIN: curso.com
+            LDAP_ADMIN_PASSWORD: password
+            LDAP_TLS: "false"
+            LDAP_TLS_ENFORCE: "false"
+            LDAP_TLS_VERIFY_CLIENT: "never"
+        tty: true
+        stdin_open: true
+        command: --copy-service
+        volumes:
+          - ./ldap:/container/service/slapd/assets/config/bootstrap/ldif/custom:rw
+        domainname: "rundeck.com" 
+        hostname: "ldap.rundeck.com"
+        networks:
+                          - rundeck
+
+    phpldapadmin:
+        image: osixia/phpldapadmin:latest
+        container_name: phpldapadmin
+        environment:
+          PHPLDAPADMIN_LDAP_HOSTS: "openldap"
+          PHPLDAPADMIN_HTTPS: "false"
+        ports:
+          - "8081:80"
+        depends_on:
+          - openldap
         networks:
                           - rundeck
 
